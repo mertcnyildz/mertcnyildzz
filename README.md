@@ -59,7 +59,7 @@ This project is ideal for beginner developers looking to put their portfolio onl
 Eğer bu proje hakkında soruların olursa bana ulaşmaktan çekinme.
 Feel free to reach out if you have any questions about this project.
 
-📧 Email: hamzasezai9898@gmail.com
-🔗 GitHub: [github.com/hamzasezaikars]
+📧 Email: mertcnyildzz@icloud.com
+🔗 GitHub: [github.com/mertcnyildz]
 
 🧑‍💻 Kod seninle olsun! / May the code be with you!
