@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mert Can Yıldız | Software Developer</title>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a2e0e6f02d.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Orbitron', monospace, sans-serif;
+      background-color: #0e0e0e;
+      color: #cfcfcf;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10, 10, 10, 0.85);
+      box-shadow: 0 2px 10px rgba(0, 255, 0, 0.25);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      z-index: 10;
+      backdrop-filter: saturate(180%) blur(8px);
+      border-bottom: 1px solid #006600;
+    }
+    nav button {
+      background: linear-gradient(45deg, #003300, #006600);
+      color: #b4ffb4;
+      border: 1.5px solid #00aa00;
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', monospace;
+      box-shadow: 0 0 8px #00cc00;
+    }
+    nav button:hover {
+      background: linear-gradient(45deg, #005500, #00aa00);
+      box-shadow: 0 0 14px #00ff00;
+      color: white;
+    }
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 1rem;
+    }
+    .code-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.15;
+      pointer-events: none;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .code-bg canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 1;
+      animation: fadeOut 2s forwards;
+    }
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    header h1, header p {
+      z-index: 2;
+      opacity: 0;
+      animation: fadeInUp 2s ease forwards;
+      color: #7fff7f;
+      text-shadow: 0 0 6px #60c060, 0 0 14px #90f090;
+    }
+    header h1 {
+      font-size: 4rem;
+      animation-delay: 2s;
+      letter-spacing: 3px;
+    }
+    header p {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      animation-delay: 3s;
+      font-weight: 600;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .scroll-down {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      z-index: 2;
+      color: #7fff7f;
+      text-shadow: 0 0 6px #60c060;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+    section {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: auto;
+      font-size: 1.15rem;
+      color: #b4ffb4;
+      text-shadow: 0 0 4px #2a5d2a;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+    }
+    h2 {
+      font-size: 2.4rem;
+      margin-bottom: 1.2rem;
+      color: #7fff7f;
+      text-shadow: 0 0 10px #60c060;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+    h3 {
+      font-size: 1.5rem;
+      color: #9fff9f;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 6px #60c060;
+    }
+    ul li {
+      margin-bottom: 0.6rem;
+    }
+    a {
+      color: #7fff7f;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #b4ffb4;
+      text-shadow: 0 0 10px #90f090;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <button onclick="toggleLang()">🌐 TR / EN</button>
+  </nav>
+
+  <header>
+    <div class="code-bg">
+      <canvas id="matrix"></canvas>
+    </div>
+    <h1>Mert Can YILDIZ</h1>
+    <p>Software Developer</p>
+    <div class="scroll-down">⬇️</div>
+  </header>
+
+  <section id="about">
+    <h2>Hakkımda / About Me</h2>
+    <p id="about-text">
+Çankırı Karatekin Üniversitesi Bilgisayar
+ Programcılığı bölümü öğrencisiyim. Yazılım
+ geliştirme alanında kendimi sürekli geliştiriyor,
+ özellikle C#, web teknolojileri ve veritabanı
+ yönetimi konularında bilgi ve pratik kazanmaya
+ odaklanıyorum.
+ Farklı sektörlerde edindiğim deneyimler
+ sayesinde ekip çalışması, iletişim ve sorumluluk
+ bilinci gibi profesyonel becerilerimi
+ güçlendirdim. Şimdi bu becerilerimi bilişim
+ sektöründe kullanarak kurumsal bir ortamda
+ staj yapmayı, yazılım geliştirme süreçlerinde
+ aktif rol alarak mesleki tecrübe kazanmayı
+ hedefliyorum.    </p>
+  </section>
+
+  <section id="education">
+    <h2>Eğitim / Education</h2>
+    <p id="education-text">Karatekin Üniversitesi – Bilgisayar Programcılığı</p>
+  </section>
+
+  
+
+  <section id="projects">
+    <h2>Projeler / Projects</h2>
+    <p><a href="https://github.com/hamzasezaikars/text-summarization-with-python-main" target="_blank">Text Summarization with Python 🔗</a></p>
+    <p><a href="https://github.com/hamzasezaikars/ECG_signal_analysis.git" target="_blank">ECG Signal Analysis 🔗</a></p>
+    <p><a href="https://github.com/hamzasezaikars/diabetes_prediction.git" target="_blank">Diabetes Prediction 🔗</a></p>
+    <p>Daha fazlası için: <a href="https://github.com/mertcnyildz" target="_blank" id="github-link">GitHub Sayfamı Ziyaret Et 🔗</a></p>
+  </section>
+
+  <section id="skills">
+    <h2>Yetenekler / Skills</h2>
+    <h3>💻 Teknik Yetenekler / Technical Skills</h3>
+    <ul id="tech-skills">
+      <li><strong>Diller:</strong> C#, JavaScript, HTML5, CSS3</li>
+      <li><strong>Framework ve Kütüphaneler:</strong> React.js, Ruby on Rails, Bootstrap</li>
+      <li><strong>Veritabanları:</strong> PostgreSQL, MySQL, Firebase (Authentication, Firestore, Hosting)</li>
+      <li><strong>Araçlar ve Teknolojiler:</strong> Git, GitHub, Linux</li>
+      <li><strong>Diğer:</strong> Duyarlı (Responsive) Tasarım, Sürüm Kontrolü</li>
+    </ul>
+
+    <h3>🧠 Kişisel Beceriler / Soft Skills</h3>
+    <ul id="soft-skills">
+      <li>İnterneti etkin kullanarak araştırma yapma ve problem çözme becerisi</li>
+      <li>Takım çalışmasına uyum sağlama ve iş birliği içinde çalışma yeteneği</li>
+      <li>Yeni teknolojilere hızlı adapte olma ve hızlı öğrenme kapasitesi</li>
+      <li>Sürekli kendini geliştirmeye açık, değişime kolaylıkla uyum sağlayabilen</li>
+      <li>Öğrenmeye istekli ve proaktif çalışma yaklaşımına sahip</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>İletişim / Contact</h2>
+    <p>📧 mertcnyildzz@icloud.com</p>
+    <p>
+      <a href="https://www.linkedin.com/in/mert-can-y%C4%B1ld%C4%B1z-315b16362/" target="_blank"><i class="fab fa-linkedin" style="margin-right:6px;"></i>LinkedIn</a> | 
+      <a href="https://github.com/mertcnyildz" target="_blank"><i class="fab fa-github" style="margin-right:6px;"></i>GitHub</a>
+    </p>
+  </section>
+
+  <script>
+    ScrollReveal().reveal('section', { delay: 300, duration: 1000, origin: 'bottom', distance: '50px' });
+
+    const trAbout = `Çankırı Karatekin Üniversitesi Bilgisayar
+ Programcılığı bölümü öğrencisiyim. Yazılım
+ geliştirme alanında kendimi sürekli geliştiriyor,
+ özellikle C#, web teknolojileri ve veritabanı
+ yönetimi konularında bilgi ve pratik kazanmaya
+ odaklanıyorum.
+ Farklı sektörlerde edindiğim deneyimler
+ sayesinde ekip çalışması, iletişim ve sorumluluk
+ bilinci gibi profesyonel becerilerimi
+ güçlendirdim. Şimdi bu becerilerimi bilişim
+ sektöründe kullanarak kurumsal bir ortamda
+ staj yapmayı, yazılım geliştirme süreçlerinde
+ aktif rol alarak mesleki tecrübe kazanmayı
+ hedefliyorum.`;
+    const enAbout = ` I am a student of the Computer Programming
+ department at Çankırı Karatekin University. I
+ continuously develop myself in the field of
+ software development, focusing particularly on
+ gaining knowledge and practical experience in
+ C#, web technologies, and database
+ management. Through the experiences I have
+ gained in different sectors, I have strengthened
+ my professional skills such as teamwork,
+ communication, and a sense of responsibility. I
+ now aim to apply these skills in the IT sector by
+ doing an internship in a corporate environment,
+ actively participating in software development
+ processes and gaining professional experience.`;
+
+    const trEducation = `Balıkesir Üniversitesi – Bilgisayar Programcılığı 2024-`;
+    const enEducation = `Karatekin University – Computer Programming 2024-`;
+
+    const trProjectsMore = `Daha fazlası için: `;
+    const enProjectsMore = `For more: `;
+
+    const trTechSkills = `
+      <li><strong>Diller:</strong> C#, HTML5, CSS3</li>
+      <li><strong>Framework ve Kütüphaneler:</strong> React.js, Ruby on Rails, Bootstrap</li>
+      <li><strong>Veritabanları:</strong> PostgreSQL, MySQL, Firebase (Authentication, Firestore, Hosting)</li>
+      <li><strong>Araçlar ve Teknolojiler:</strong> Git, GitHub, Linux</li>
+      <li><strong>Diğer:</strong> Duyarlı (Responsive) Tasarım, Sürüm Kontrolü</li>
+    `;
+    const enTechSkills = `
+      <li><strong>Languages:</strong> C#, HTML5, CSS3</li>
+      <li><strong>Frameworks & Libraries:</strong> React.js, Ruby on Rails, Bootstrap</li>
+      <li><strong>Databases:</strong> PostgreSQL, MySQL, Firebase (Authentication, Firestore, Hosting)</li>
+      <li><strong>Tools & Technologies:</strong> Git, GitHub, Linux</li>
+      <li><strong>Other:</strong> Responsive Design, Version Control</li>
+    `;
+
+    const trSoftSkills = `
+      <li>İnterneti etkin kullanarak araştırma yapma ve problem çözme becerisi</li>
+      <li>Takım çalışmasına uyum sağlama ve iş birliği içinde çalışma yeteneği</li>
+      <li>Yeni teknolojilere hızlı adapte olma ve hızlı öğrenme kapasitesi</li>
+      <li>Sürekli kendini geliştirmeye açık, değişime kolaylıkla uyum sağlayabilen</li>
+      <li>Öğrenmeye istekli ve proaktif çalışma yaklaşımına sahip</li>
+    `;
+    const enSoftSkills = `
+      <li>Effective research and problem-solving skills using the internet</li>
+      <li>Ability to adapt to teamwork and collaborate effectively</li>
+      <li>Quick adaptation to new technologies and fast learning ability</li>
+      <li>Open to continuous self-improvement and easily adaptable to change</li>
+      <li>Eager to learn and possessing a proactive work approach</li>
+    `;
+
+    let isTR = true;
+
+    function toggleLang() {
+      if(isTR) {
+        // İngilizceye geç
+        document.getElementById('about-text').innerText = enAbout;
+        document.getElementById('education-text').innerText = enEducation;
+        document.getElementById('experience-text').innerText = enExperience;
+        document.querySelector('#projects p:last-child').innerHTML = `${enProjectsMore}<a href="https://github.com/hamzasezaikars" target="_blank">GitHub Page 🔗</a>`;
+        document.getElementById('tech-skills').innerHTML = enTechSkills;
+        document.getElementById('soft-skills').innerHTML = enSoftSkills;
+      } else {
+        // Türkçeye geç
+        document.getElementById('about-text').innerText = trAbout;
+        document.getElementById('education-text').innerText = trEducation;
+        document.getElementById('experience-text').innerText = trExperience;
+        document.querySelector('#projects p:last-child').innerHTML = `${trProjectsMore}<a href="https://github.com/hamzasezaikars" target="_blank">GitHub Sayfamı Ziyaret Et 🔗</a>`;
+        document.getElementById('tech-skills').innerHTML = trTechSkills;
+        document.getElementById('soft-skills').innerHTML = trSoftSkills;
+      }
+      isTR = !isTR;
+    }
+
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const katakana = "アァイィウヴエカガキギクグケコサザシジスズセソタダチッヂヅテトナニヌネノハバパヒフヘホマミムメモヤユヨラリルレロワヲン";
+    const latin = "MertCanYıldızSoftwareDeveloper";
+    const mix = katakana + latin;
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = [];
+
+    for(let x = 0; x < columns; x++) drops[x] = 1;
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.shadowColor = "#60c060";
+      ctx.shadowBlur = 5;
+      ctx.fillStyle = "#7fff7f";
+      ctx.font = fontSize + "px monospace";
+
+      for(let i = 0; i < drops.length; i++) {
+        const text = mix.charAt(Math.floor(Math.random() * mix.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+          drops[i] = 0;
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 35);
+  </script>
+</body>
+</html>
